@@ -1,4 +1,4 @@
-module github.com/jfrog/jfrog-cli-plugin-template
+module github.com/cohmoti/jfrog-cli-nlc
 
 go 1.14
 

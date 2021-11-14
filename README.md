@@ -1,40 +1,32 @@
-# hello-frog
+# talk2frog
 
 ## About this plugin
-This plugin is a template and a functioning example for a basic JFrog CLI plugin. 
-This README shows the expected structure of your plugin's README.
+This plugin brings the power of natural language processing to the JFrog command line. It transforms descriptions of command line tasks in English to their jfrog CLI syntax
 
 ## Installation with JFrog CLI
 Installing the latest version:
 
-`$ jfrog plugin install hello-frog`
+`$ jfrog plugin install talk2frog`
 
 Installing a specific version:
 
-`$ jfrog plugin install hello-frog@version`
+`$ jfrog plugin install talk2frog@version`
 
 Uninstalling a plugin
 
-`$ jfrog plugin uninstall hello-frog`
+`$ jfrog plugin uninstall talk2frog`
 
 ## Usage
 ### Commands
-* hello
-    - Arguments:
-        - addressee - The name of the person you would like to greet.
-    - Flags:
-        - shout: Makes output uppercase **[Default: false]**
-        - repeat: Greets multiple times **[Default: 1]**
+* do
+    - Argument:
+        Quoted English command description
     - Example:
     ```
-  $ jfrog hello-frog hello world --shout --repeat=2
+  $ jfrog talk2frog do "Audit the Go project at the current directory using the watch1 watch defined in Xray"
   
-  NEW GREETING: HELLO WORLD!
-  NEW GREETING: HELLO WORLD!
+  jfrog xr ago --watches "watch1"
   ```
-
-### Environment variables
-* HELLO_FROG_GREET_PREFIX - Adds a prefix to every greet **[Default: New greeting: ]**
 
 ## Additional info
 None.

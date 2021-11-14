@@ -7,8 +7,8 @@
 tmp
 out
 
-# Template executable
-jfrog-cli-plugin-template
+# Plug-in executable
+talk2frog
 
 # Vim
 *~
