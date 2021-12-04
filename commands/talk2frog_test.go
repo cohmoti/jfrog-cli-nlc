@@ -3,6 +3,7 @@ package commands
 import (
 	"github.com/jfrog/jfrog-client-go/utils/log"
 	"github.com/stretchr/testify/assert"
+	"os"
 	"testing"
 )
 
@@ -12,7 +13,13 @@ func init() {
 
 func TestSimpleDo(t *testing.T) {
 	conf := &doConfiguration{
-		nlCommand: "Audit the Go project at the current directory using the watch1 watch defined in Xray",
+		nlCommand: `Audit the Go project at the current directory using the "watch1" watch defined in Xray`,
 	}
-	assert.Equal(t, "jfrog xr ago --watches \"watch1\"", doTranslate(conf))
+	os.Setenv("TALK2FROG_MODEL_HOME", "..")
+
+	result, err := doTranslate(conf)
+	if err != nil {
+		log.Error("Failed doTranslate() err: ", err)
+	}
+	assert.Equal(t, "jfrog xr ago --watches \"watch1\"", result)
 }
