@@ -29,7 +29,7 @@ Uninstalling a plugin
   ```
 
 ## Additional info
-None.
+This plugin uses a learning module named nlc2cmd. We forked the project's repository and added the things that are relevant for learning jfrog cli specific commands. This module is based on the transformer architecture for sequence to sequence translation. 
 
 ## Release Notes
 The release notes are available [here](RELEASE.md).
