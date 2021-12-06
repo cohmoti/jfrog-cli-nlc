@@ -1,0 +1,3 @@
+[submodule "nlc2cmd"]
+	path = nlc2cmd
+	url = https://github.com/cohmoti/Magnum-NLC2CMD.git
