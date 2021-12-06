@@ -3,12 +3,13 @@ package commands
 import (
 	"errors"
 	"fmt"
-	"github.com/jfrog/jfrog-cli-core/v2/plugins/components"
-	"github.com/jfrog/jfrog-client-go/utils/log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/jfrog/jfrog-cli-core/v2/plugins/components"
+	"github.com/jfrog/jfrog-client-go/utils/log"
 )
 
 func GetDoCommand() components.Command {
@@ -51,12 +52,20 @@ func doTranslate(c *doConfiguration) (string, error) {
 	if homePath == "" {
 		return "", errors.New(`missing "TALK2FROG_MODEL_HOME" environment variable`)
 	}
-	scriptPath := filepath.Join(homePath, "query_script.py")
-	if output, err := exec.Command("python", scriptPath, c.nlCommand).Output(); err != nil {
+	scriptPath := filepath.Join(homePath, "main.py")
+	if output, err := exec.Command("python", scriptPath, "--mode", "single", "--sentence", c.nlCommand, "--model_dir", filepath.Join(homePath, "src/model/run")).Output(); err != nil {
 		return "", fmt.Errorf("an error occurred during python model execution: %v", err)
 	} else {
 		// result := "jfrog xr ago --watches \"watch1\""
-		result := strings.TrimSuffix(string(output), "\n")
+		lines := strings.Split(string(output), "\n")
+		result := ""
+		for _, s := range lines {
+			if strings.HasPrefix(s, "Result=") {
+				result = s[len("Result="):]
+				break
+			}
+		}
+		//result := strings.TrimSuffix(string(output), "\n")
 		log.Debug("Got this output string from python model:", result)
 		return result, nil
 	}
