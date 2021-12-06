@@ -53,7 +53,7 @@ func doTranslate(c *doConfiguration) (string, error) {
 		return "", errors.New(`missing "TALK2FROG_MODEL_HOME" environment variable`)
 	}
 	scriptPath := filepath.Join(homePath, "main.py")
-	if output, err := exec.Command("python", scriptPath, "--mode", "single", "--sentence", c.nlCommand, "--model_dir", filepath.Join(homePath, "src/model/run")).Output(); err != nil {
+	if output, err := exec.Command("python", scriptPath, "--mode", "single", "--sentence", c.nlCommand, "--model_dir", filepath.Join(homePath, "src/model/run", "--model_file", "model_step_2000.pt")).Output(); err != nil {
 		return "", fmt.Errorf("an error occurred during python model execution: %v", err)
 	} else {
 		// result := "jfrog xr ago --watches \"watch1\""
