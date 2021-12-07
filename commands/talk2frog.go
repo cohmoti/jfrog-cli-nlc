@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/jfrog/jfrog-cli-core/v2/plugins/components"
+	"github.com/jfrog/jfrog-cli-core/v2/utils/coreutils"
 	"github.com/jfrog/jfrog-client-go/utils/log"
 )
 
@@ -36,12 +37,11 @@ func doCmd(c *components.Context) error {
 	//conf.nlCommand = strings.Join(c.Arguments, " ")
 	conf.nlCommand = c.Arguments[0]
 
-	result, err := doTranslate(conf)
+	_, err := doTranslate(conf)
 	if err != nil {
 		log.Error("Failed doTranslate() err: ", err)
 		return err
 	}
-	log.Output(result)
 	return nil
 }
 
@@ -52,6 +52,7 @@ func doTranslate(c *doConfiguration) (string, error) {
 	if homePath == "" {
 		return "", errors.New(`missing "TALK2FROG_MODEL_HOME" environment variable`)
 	}
+	log.Output("Translating to command ...")
 	cmd := exec.Command("python", "main.py", "--mode", "single", "--sentence", c.nlCommand, "--model_dir", filepath.Join(homePath, "src/model/run"), "--model_file", "model_step_2500.pt")
 	cmd.Dir = homePath
 	if output, err := cmd.Output(); err != nil {
@@ -66,7 +67,27 @@ func doTranslate(c *doConfiguration) (string, error) {
 				break
 			}
 		}
-		log.Debug("Got this output string from python model:", result)
+
+		log.Output("Result: " + result)
+
+		if strings.HasPrefix(result, "jfrog ") {
+			if coreutils.AskYesNo("Would you like to execute it now?", false) {
+				result, err = execJfrogCli(result)
+				if err != nil {
+					log.Output(result)
+				}
+			}
+		}
 		return result, nil
 	}
+}
+
+func execJfrogCli(resultCmd string) (string, error) {
+	cmdArr := strings.Split(resultCmd, " ")
+	command := exec.Command(cmdArr[0], cmdArr[1:]...)
+	command.Stderr = os.Stderr
+	//command.Stdout = os.Stdout
+	command.Env = os.Environ()
+	output, err := command.Output()
+	return string(output), err
 }

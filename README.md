@@ -34,8 +34,10 @@ Uninstalling a plugin
     - Example:
     ```
   $ jfrog talk2frog do "Audit the Go project at the current directory using the watch1 watch defined in Xray"
-  
-  jfrog xr ago --watches "watch1"
+  Translating to command ...
+  Result: jfrog xr ago --watches watch1
+  Would you like to execute it now? (y/n) [n]?
+
   ```
 
 ## Additional info
