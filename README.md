@@ -9,7 +9,7 @@ Make sure you have python 3 installed on the machine and accessible. Install the
 
 `pip install -r nlc2cmd/requirements.txt`
 
-Train the model as described in the nlc2cmd [readme](https://github.com/cohmoti/Magnum-NLC2CMD/blob/feature/jfrog-cli/README.md). You can also download a pretrained [model](link/to/file) and place in nlc2cmd/src/model/run.
+Train the model as described in the nlc2cmd [readme](https://github.com/cohmoti/Magnum-NLC2CMD/blob/feature/jfrog-cli/README.md). You can also download a pretrained [model](https://drive.google.com/file/d/1P-59TwoBIWc-nNvCbEgudc4ZSZ4HrTvN/view?usp=sharing) and place in nlc2cmd/src/model/run.
 
 Define and environment variable TALK2FROG_MODEL_HOME to point to the nlc2cmd path (jfrog-cli-nlc/nlc2cmd).
 
