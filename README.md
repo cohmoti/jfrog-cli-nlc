@@ -4,6 +4,16 @@
 This plugin brings the power of natural language processing to the JFrog command line. It transforms descriptions of command line tasks in English to their jfrog CLI syntax
 
 ## Installation with JFrog CLI
+### Environment installation
+Make sure you have python 3 installed on the machine and accessible. Install the nlc2cmd requirements:
+
+`pip install -r nlc2cmd/requirements.txt`
+
+Train the model as described in the nlc2cmd [readme](https://github.com/cohmoti/Magnum-NLC2CMD/blob/feature/jfrog-cli/README.md). You can also download a pretrained [model](link/to/file) and place in nlc2cmd/src/model/run.
+
+Define and environment variable TALK2FROG_MODEL_HOME to point to the nlc2cmd path (jfrog-cli-nlc/nlc2cmd).
+
+### Plugin installation
 Installing the latest version:
 
 `$ jfrog plugin install talk2frog`
