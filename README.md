@@ -45,3 +45,6 @@ This plugin uses a learning module named nlc2cmd. We forked the project's reposi
 
 ## Release Notes
 The release notes are available [here](RELEASE.md).
+
+## License
+Apache-2.0
